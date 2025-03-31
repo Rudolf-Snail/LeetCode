@@ -3,8 +3,8 @@ using _1._Two_Sum;
 
 Solution solution = new Solution();
 
-int[] nums = [3, 2, 3];
-var target = 6;
+int[] nums = [1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 7, 1, 1, 1, 1, 1];
+var target = 11;
 
 var result = solution.TwoSum(nums, target);
 
