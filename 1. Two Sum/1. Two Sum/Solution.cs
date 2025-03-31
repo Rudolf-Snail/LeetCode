@@ -7,25 +7,22 @@ namespace _1._Two_Sum
         public int[] TwoSum(int[] nums, int target)
         {
             int length = nums.Length;
-            int index1 = 0, index2 = 0;
-            int currentNumber1, wantedNumber;
+            int index = 1;
+            int currentNumber, wantedNumber;
 
             Dictionary<int, int> hashMap = new Dictionary<int, int>(length);
+            hashMap[nums[0]] = 0;
 
-            for (index1 = 0; index1 < length; index1++)
+            for (; index < length; index++)
             {
-                currentNumber1 = nums[index1];
+                currentNumber = nums[index];
 
-                wantedNumber = target - currentNumber1;
+                wantedNumber = target - currentNumber;
 
                 if (hashMap.ContainsKey(wantedNumber))
-                {
-                    index2 = hashMap[wantedNumber];
-                    
-                    return [index1, index2];
-                }
+                    return [index, hashMap[wantedNumber]];
 
-                hashMap[currentNumber1] = index1;
+                hashMap[currentNumber] = index;
             }
 
             return Array.Empty<int>(); 
