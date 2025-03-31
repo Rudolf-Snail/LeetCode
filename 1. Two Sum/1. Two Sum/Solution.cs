@@ -24,17 +24,18 @@ namespace _1._Two_Sum
 
                 wantedNumber = target - currentNumber1;
 
+                if (hashtable.ContainsKey(wantedNumber))
+                {
 #pragma warning disable CS8605 // Unboxing a possibly null value.
-                if (!hashtable.ContainsKey(wantedNumber) || index1 == ( int ) hashtable[wantedNumber])
-                    continue;
-
-                index2 = ( int ) hashtable[wantedNumber];
+                    index2 = ( int ) hashtable[wantedNumber];
 #pragma warning restore CS8605 // Unboxing a possibly null value.
 
-                return [index1, index2];
+                    if (index1 != index2)
+                        return [index1, index2];
+                }
             }
 
-            return [-1, -1]; // Returned if no correct result is found.
+            return Array.Empty<int>(); 
         }
     }
 }
