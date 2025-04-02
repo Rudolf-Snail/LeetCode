@@ -13,14 +13,12 @@
 
             ListNode result = currentNodeOfResult;
 
-            for (ListNode? currentL1Node = l1.next, currentL2Node = l2.next; currentL1Node != null || currentL2Node != null || addition > 0;)
+            for (ListNode? currentL1Node = l1.next, currentL2Node = l2.next; currentL1Node != null || currentL2Node != null || addition > 0; NextNodes(ref currentL1Node, ref currentL2Node))
             {
                 currentNodeOfResult = CreateAndMoveToNextNode(currentNodeOfResult);
 
                 CurrentNodesNumbers(out l1Value, out l2Value, currentL1Node, currentL2Node);
                 currentSum = CalculateCurrentNumber(ref addition, ref currentSum, currentNodeOfResult, ref l1Value, ref l2Value);
-
-                NextNodes(ref currentL1Node, ref currentL2Node);
             }
 
             return result;
