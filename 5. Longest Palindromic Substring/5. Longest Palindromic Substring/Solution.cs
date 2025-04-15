@@ -4,44 +4,56 @@
     {
         public string LongestPalindrome(string input)
         {
-            int n = input.Length;
-            bool[,] dp = new bool[n, n];
             int[] answer = [0, 0];
+            int answerLength = answer[1] - answer[0] + 1;
 
-            int i;
+            int oddLength, evenLength, distance;
 
-            for (i = 0; i < n; i++)
-                dp[i, i] = true;
-
-            int j;
-
-            for (i = 0, j = 1; j < n; i++, j++)
+            for (int index = 0; index < input.Length; index++)
             {
-                if (input[i] == input[j])
+                oddLength = Expand(index, index, input);
+
+                if (oddLength > answerLength)
                 {
-                    dp[i, j] = true;
-                    answer = [i, j];
+                    distance = oddLength / 2;
+
+                    answer[0] = index - distance;
+                    answer[1] = index + distance;
+
+                    answerLength = oddLength;
+                }
+
+                evenLength = Expand(index, index + 1, input);
+
+                if (evenLength > answerLength)
+                {
+                    distance = (evenLength / 2) - 1;
+
+                    answer[0] = index - distance;
+                    answer[1] = index + distance + 1;
+                    
+                    answerLength = evenLength;
                 }
             }
 
-            for (int difference = 2; difference < n; difference++)
-            {
-                for (i = 0; i < n - difference; i++)
-                {
-                    j = i + difference;
-
-                    if (input[i] == input[j] && dp[i + 1, j - 1])
-                    {
-                        dp[i, j] = true;
-                        answer = [i, j];
-                    }
-                }
-            }
-
-            i = answer[0];
-            j = answer[1];
+            int i = answer[0];
+            int j = answer[1];
 
             return input[i..(j + 1)];
+        }
+
+        public int Expand(int i, int j, string text)
+        {
+            int left = i;
+            int right = j;
+
+            for (; left >= 0 && right < text.Length; left--, right++)
+            {
+                if (text[left] != text[right])
+                    break;
+            }
+
+            return right - left - 1;
         }
     }
 }
